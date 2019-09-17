@@ -17,7 +17,15 @@
 <script>
 import { userLogin } from '@/api/user/user'
 import {mapActions, mapMutations} from 'vuex'
+
+
+  //var zhiManager = (getzhiSDKInstance());
+  //再调用load方法
+  var zhiManager = (getzhiSDKInstance());
+  
+
   export default {
+    
     name: "Login",
     data() {
       return {
@@ -37,6 +45,16 @@ import {mapActions, mapMutations} from 'vuex'
         // 对话框显示和隐藏
         dialogVisible: false
       }
+    },
+    mounted () {
+      //设置显示
+      zhiManager.on("load", function() {
+          zhiManager.initBtnDOM();
+      });
+      //设置位置
+      zhiManager.set('location',2);
+      //设置颜色
+      zhiManager.set('color','FF5151');
     },
     methods: {
       ...mapActions([
